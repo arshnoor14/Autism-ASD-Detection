@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us - Autism Awareness</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #fdfbfb, #ebedee);
+      color: #333;
+    }
+
+    .navbar {
+      background: linear-gradient(to right, #252526, #5c5d5f);
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      background: linear-gradient(45deg, #7c7a7d, #686869);
+    }
+
+    .navbar a:hover {
+      background: linear-gradient(45deg, #36d1dc, #5b86e5);
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(232, 225, 225, 0.3);
+    }
+
+    .contact-section {
+      max-width: 700px;
+      margin: 80px auto;
+      padding: 40px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 16px;
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    input, textarea {
+      padding: 15px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      width: 100%;
+      resize: vertical;
+    }
+
+    button {
+      background: linear-gradient(to right, #ef476f, #ff6f61);
+      border: none;
+      padding: 15px;
+      font-size: 18px;
+      color: white;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(255, 111, 97, 0.3);
+    }
+
+    @media (max-width: 600px) {
+      .contact-section {
+        margin: 40px 20px;
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <a href="{{ url_for('homepage') }}">Home</a>
+    <a href="{{ url_for('test') }}">Quiz</a>
+    <a href="{{ url_for('cnn_input') }}">Upload Image</a>
+    <a href="{{ url_for('text_input') }}">Text Input</a>
+    <a href="{{ url_for('contact') }}">Contact Us</a>
+  </div>
+
+  <div class="contact-section">
+    <h1>Contact Us</h1>
+    <p>Have questions, feedback, or just want to say hi?  
+    Fill out the form below and we’ll get back to you as soon as we can. 💬</p>
+    
+    <form action="{{ url_for('submit_contact') }}" method="post">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <textarea name="message" rows="6" placeholder="Your Message..." required></textarea>
+      <button type="submit">Send Message </button>
+    </form>
+  </div>
+
+</body>
+</html>

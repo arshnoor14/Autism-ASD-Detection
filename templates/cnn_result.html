@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autism Detection Result</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f2f6fc;
+            margin: 0;
+            padding: 0;
+            color: #1a1a1a;
+            text-align: center;
+        }
+
+        .navbar {
+            background-color: #1c1c1c;
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 18px;
+            font-size: 16px;
+            border-radius: 6px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #333333;
+            color: #f2f2f2;
+        }
+
+        .result-container {
+            max-width: 600px;
+            margin: 100px auto;
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        h2 {
+            color: #007acc;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .result {
+            font-size: 22px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin: 20px 0;
+        }
+
+        .btn {
+            background-color: #1a1a1a;
+            color: white;
+            padding: 14px 24px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #3a3a3a;
+            transform: scale(1.03);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="{{ url_for('homepage') }}">Home</a>
+        <a href="{{ url_for('test') }}">Quiz</a>
+        <a href="{{ url_for('cnn_input') }}">Upload Image</a>
+        <a href="{{ url_for('text_input') }}">Text Input</a>
+        <a href="{{ url_for('contact') }}">Contact Us</a>
+</div>
+
+    <div class="result-container">
+        <h2>Prediction Result</h2>
+        <div class="result">
+            {{ prediction }}
+        </div>
+        <a href="{{ url_for('cnn_input') }}" class="btn">Back to Quiz</a>
+    </div>
+
+</body>
+</html>

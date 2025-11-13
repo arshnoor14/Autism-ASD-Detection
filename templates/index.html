@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autism Test - Autism Awareness</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #fdfcfb, #e2d1c3);
+            margin: 0;
+            padding: 0;
+            color: #1a1a1a;
+            animation: bgShift 20s ease infinite;
+            background-size: 200% 200%;
+        }
+    
+        @keyframes bgShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    
+        .navbar {
+            background: linear-gradient(to right, #252526, #5c5d5f);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+    
+        .navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            background: linear-gradient(45deg, #7c7a7d, #686869);
+        }
+    
+        .navbar a:hover {
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            box-shadow: 0 0 12px rgba(232, 225, 225, 0.3);
+            transform: scale(1.05);
+        }
+    
+        .test-container {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 40px;
+            max-width: 700px;
+            margin: 60px auto;
+            border-radius: 16px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(8px);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+    
+        h2 {
+            color: #333;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.05);
+        }
+    
+        .user-info, .question {
+            font-size: 16px;
+            margin: 20px 0;
+            text-align: left;
+            color: #333;
+        }
+    
+        select, input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            background-color: #fafafa;
+            margin-top: 5px;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+    
+        select:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: #a29bfe;
+            box-shadow: 0 0 8px rgba(162, 155, 254, 0.4);
+        }
+    
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+    
+        input[type="radio"] {
+            display: none;
+        }
+    
+        .option {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #6c5ce7;
+            color: #ffffff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(108, 92, 231, 0.3);
+        }
+    
+        input[type="radio"]:checked + label[for*="yes"].option {
+            background-color: #00b894;
+            transform: scale(1.05);
+            box-shadow: 0 6px 14px rgba(0, 184, 148, 0.4);
+        }
+    
+        input[type="radio"]:checked + label[for*="no"].option {
+            background-color: #d63031;
+            transform: scale(1.05);
+            box-shadow: 0 6px 14px rgba(214, 48, 49, 0.4);
+        }
+    
+        .btn, .submit-btn {
+            background: linear-gradient(to right, #ef976b, #ff5e62);
+            color: #fff;
+            padding: 14px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 6px 16px rgba(145, 124, 124, 0.4);
+        }
+    
+        .btn:hover, .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(149, 119, 119, 0.5);
+        }
+    
+        .result {
+            margin-top: 30px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #2d3436;
+        }
+    
+        @media (max-width: 768px) {
+            .test-container {
+                padding: 30px 20px;
+            }
+    
+            .option {
+                width: 100%;
+                text-align: center;
+            }
+    
+            .btn-group {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+    
+    
+    
+    
+</head>
+<body>
+
+    <div class="navbar">
+        <a href="{{ url_for('homepage') }}">Home</a>
+        <a href="{{ url_for('test') }}">Quiz</a>
+        <a href="{{ url_for('cnn_input') }}">Upload Image</a>
+        <a href="{{ url_for('text_input') }}">Text Input</a>
+        <a href="{{ url_for('contact') }}">Contact Us</a>
+</div>
+    
+
+    <div class="test-container">
+        <h2>Autism Screening Test</h2>
+        <form action="{{ url_for('predict') }}" method="POST">
+            
+            <!-- Age Input -->
+            <div class="user-info">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+
+            <!-- Gender Selection -->
+            <div class="user-info">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender" required>
+                    <option value="">Select</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <!-- Jaundice Selection -->
+            <div class="user-info">
+                <label for="jaundice">Have you ever had jaundice?</label>
+                <select id="jaundice" name="jaundice" required>
+                    <option value="">Select</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+
+<!-- Used App Before Selection -->
+
+    
+    
+
+
+<!-- Family History Selection -->
+<!-- <div class="user-info">
+    <label for="family_history">Is there a family history of autism?</label>
+    <select id="family_history" name="family_history" required>
+        <option value="">Select</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+</div> -->
+
+            <!-- Questions -->
+            <div class="question">
+                <p>1. Do you find it difficult to maintain eye contact with people?</p>
+                <div class="btn-group">
+                    <input type="radio" id="q1_yes" name="q1" value="1" required>
+                    <label for="q1_yes" class="option">Yes</label>
+                    
+
+                    <input type="radio" id="q1_no" name="q1" value="0">
+                    <label for="q1_no" class="option">No</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>2. Do you have trouble understanding social cues?</p>
+                <div class="btn-group">
+                    <input type="radio" id="q2_yes" name="q2" value="1" required>
+                    <label for="q2_yes" class="option">Yes</label>
+
+                    <input type="radio" id="q2_no" name="q2" value="0">
+                    <label for="q2_no" class="option">No</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>3. Do you prefer routines and dislike changes?</p>
+                <div class="btn-group">
+                    <input type="radio" id="q3_yes" name="q3" value="1" required>
+                    <label for="q3_yes" class="option">Yes</label>
+
+                    <input type="radio" id="q3_no" name="q3" value="0">
+                    <label for="q3_no" class="option">No</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>4. Do you get overwhelmed by loud noises or bright lights?</p>
+                <div class="btn-group">
+                    <input type="radio" id="q4_yes" name="q4" value="1" required>
+                    <label for="q4_yes" class="option">Yes</label>
+
+                    <input type="radio" id="q4_no" name="q4" value="0">
+                    <label for="q4_no" class="option">No</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>5. Do you find it challenging to start or maintain conversations?</p>
+                <div class="btn-group">
+                    <input type="radio" id="q5_yes" name="q5" value="1" required>
+                    <label for="q5_yes" class="option">Yes</label>
+
+                    <input type="radio" id="q5_no" name="q5" value="0">
+                    <label for="q5_no" class="option">No</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>6. Do you engage in repetitive behaviors (e.g., hand-flapping, rocking)?</p>
+                <div class="btn-group">
+                    <input type="radio" id="q6_yes" name="q6" value="1" required>
+                    <label for="q6_yes" class="option">Yes</label>
+
+                    <input type="radio" id="q6_no" name="q6" value="0">
+                    <label for="q6_no" class="option">No</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>7. Do you feel anxious in social situations?</p>
+                <div class="btn-group">
+                    <input type="radio" id="q7_yes" name="q7" value="1" required>
+                    <label for="q7_yes" class="option">Yes</label>
+
+                    <input type="radio" id="q7_no" name="q7" value="0">
+                    <label for="q7_no" class="option">No</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>8. Do you have intense interests in specific topics?</p>
+                <div class="btn-group">
+                    <input type="radio" id="q8_yes" name="q8" value="1" required>
+                    <label for="q8_yes" class="option">Yes</label>
+
+                    <input type="radio" id="q8_no" name="q8" value="0">
+                    <label for="q8_no" class="option">No</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>9. Do you struggle with understanding others’ emotions?</p>
+                <div class="btn-group">
+                    <input type="radio" id="q9_yes" name="q9" value="1" required>
+                    <label for="q9_yes" class="option">Yes</label>
+
+                    <input type="radio" id="q9_no" name="q9" value="0">
+                    <label for="q9_no" class="option">No</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p>10. Do you have difficulty making or keeping friends?</p>
+                <div class="btn-group">
+                    <input type="radio" id="q10_yes" name="q10" value="1" required>
+                    <label for="q10_yes" class="option">Yes</label>
+
+                    <input type="radio" id="q10_no" name="q10" value="0">
+                    <label for="q10_no" class="option">No</label>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn submit-btn">Submit Test</button>
+        </form>
+
+        <!-- Display Prediction Result -->
+        {% if prediction %}
+        <div class="result">
+            <p>{{ prediction }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>

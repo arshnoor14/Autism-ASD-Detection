@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Result</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #e8f6f3, #f2f2f8);
+            margin: 0;
+            padding: 0;
+            color: #1a1a1a;
+        }
+
+        .navbar {
+            background-color: rgba(26, 26, 26, 0.9);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+
+        .navbar a {
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 18px;
+            font-size: 16px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar a:hover {
+            background-color: #3d3d3d;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .result-container {
+            max-width: 700px;
+            margin: 80px auto;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 50px 40px;
+            border-radius: 16px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            text-align: center;
+        }
+
+        h1 {
+            font-weight: 600;
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+        }
+
+        .result {
+            font-size: 22px;
+            font-weight: 600;
+            color: #3b3b3b;
+            padding-top: 20px;
+            margin-top: 20px;
+            background: #f6f8f9;
+            padding: 18px 24px;
+            border-radius: 10px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+            display: inline-block;
+        }
+
+        button {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+        }
+
+        button:hover {
+            background-color: #4a4a4a;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+            .result-container {
+                margin: 60px 20px;
+                padding: 40px 25px;
+            }
+
+            .navbar {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{{ url_for('homepage') }}">Home</a>
+        <a href="{{ url_for('test') }}">Quiz</a>
+        <a href="{{ url_for('cnn_input') }}">Upload Image</a>
+        <a href="{{ url_for('text_input') }}">Text Input</a>
+        <a href="{{ url_for('contact') }}">Contact Us</a>
+</div>
+    <div class="result-container">
+        <h1>Prediction Result</h1>
+        <p class="result">{{ prediction }}</p>
+    </div>
+</body>
+</html>

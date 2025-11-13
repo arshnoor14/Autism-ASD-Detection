@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome - Autism Awareness</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #f6f9fc, #e0c3fc);
+      color: #333;
+      text-align: center;
+      animation: backgroundShift 15s infinite ease-in-out;
+      background-size: 200% 200%;
+    }
+
+    @keyframes backgroundShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .navbar {
+      background: linear-gradient(to right, #252526, #5c5d5f);
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .navbar a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      padding: 12px 20px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      background: linear-gradient(45deg, #7c7a7d, #686869);
+    }
+
+    .navbar a:hover {
+      background: linear-gradient(45deg, #ff416c, #ff4b2b);
+      transform: scale(1.05);
+      box-shadow: 0 0 10px rgba(232, 225, 225, 0.3);
+    }
+
+    .hero {
+      padding: 80px 20px 40px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 42px;
+      color: #2d3436;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      line-height: 1.7;
+      color: #555;
+    }
+
+    .cta-options {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .cta-button {
+      width: 250px;
+      padding: 20px;
+      border: none;
+      border-radius: 16px;
+      font-size: 18px;
+      background: linear-gradient(to right, #ef976b, #ff5e62);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 16px rgba(145, 124, 124, 0.4);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 24px rgba(149, 119, 119, 0.5);
+    }
+
+    @media (max-width: 600px) {
+      .cta-button {
+        width: 90%;
+        font-size: 16px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <a href="{{ url_for('homepage') }}">Home</a>
+    <a href="{{ url_for('test') }}">Quiz</a>
+    <a href="{{ url_for('cnn_input') }}">Upload Image</a>
+    <a href="{{ url_for('text_input') }}">Text Input</a>
+    <a href="{{ url_for('contact') }}">Contact Us</a>
+  </div>
+
+  <div class="hero">
+    <h1>Welcome to Autism Awareness</h1>
+    <p>Choose your path: screen using a quiz, express through text, or detect from an image.  
+    Let's build awareness with empathy and AI.</p>
+
+    <div class="cta-options">
+      <a href="{{ url_for('test') }}">
+        <button class="cta-button">📝 Take the Quiz</button>
+      </a>
+      <a href="{{ url_for('text_input') }}">
+        <button class="cta-button">💬 Text-Based Input</button>
+      </a>
+      <a href="{{ url_for('cnn_input') }}">
+        <button class="cta-button">🖼️ Upload an Image</button>
+      </a>
+    </div>
+  </div>
+
+</body>
+</html>
