@@ -1,33 +1,6 @@
-# Virtual environment
-venv/
-ENV/
-env/
-
-# Python cache files
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-
-# Jupyter Notebook checkpoints
-.ipynb_checkpoints/
-
-
-echo "/*.keras" >> .gitignore
-
-
-*.h5
-*.pkl
-*.joblib
-*.pt
-*.onnx
-*.keras
-# Logs
-*.log
-
-# VS Code settings
-.vscode/
-
-# System files
-.DS_Store
-Thumbs.db
+New-Item -Path . -Name ".gitignore" -ItemType "file"
+Add-Content .gitignore "venv/"
+Add-Content .gitignore "__pycache__/"
+Add-Content .gitignore "*.pyc"
+Add-Content .gitignore ".ipynb_checkpoints/"
+Add-Content .gitignore "*.log"
