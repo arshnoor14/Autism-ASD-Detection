@@ -13,6 +13,15 @@ __pycache__/
 .ipynb_checkpoints/
 
 
+echo "/*.keras" >> .gitignore
+
+
+*.h5
+*.pkl
+*.joblib
+*.pt
+*.onnx
+*.keras
 # Logs
 *.log
 
